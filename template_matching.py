@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 
 img = cv2.imread('img/jingcai_0.jpeg',0)
 img2 = img.copy()
-template = cv2.imread('img/st.png',0)
+template = cv2.imread('img/st.jpg',0)
 w, h = template.shape[::-1]
 
 # All the 6 methods for comparison in a list
