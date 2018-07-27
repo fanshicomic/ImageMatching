@@ -2,15 +2,15 @@ package match
 
 import (
 	"image"
-	"image/png"
 	"image/jpeg"
+	"image/png"
 	"os"
 	"sort"
 )
 
 func calcDiffV0(x uint32, y uint32) uint32 {
 	if x < y {
-		return y - x 
+		return y - x
 	} else {
 		return x - y
 	}
@@ -26,12 +26,12 @@ func findMinDiffV0(src image.Image, target image.Image) int {
 	minx := -1
 	// miny := -1
 	step := 50
-	for x := 0; x < w - tw; x++ {
-		for y := 0; y < h - th; y++ {
+	for x := 0; x < w-tw; x++ {
+		for y := 0; y < h-th; y++ {
 			var sumDiff uint32
 			for tx := 0; tx < tw; tx = tx + step {
 				for ty := 0; ty < th; ty = ty + step {
-					color := src.At(x + tx, y + ty)
+					color := src.At(x+tx, y+ty)
 					r, g, b, _ := color.RGBA()
 					tColor := target.At(tx, ty)
 					tr, tg, tb, _ := tColor.RGBA()
@@ -62,7 +62,6 @@ func MatchV0(f string) []string {
 	src, err := jpeg.Decode(infile)
 	checkErr(err)
 
-
 	targetFolder := "../shishen/"
 	dir, err := os.Open(targetFolder)
 	checkErr(err)
@@ -91,5 +90,5 @@ func MatchV0(f string) []string {
 		lst = append(lst, r.name)
 	}
 
- 	return lst
+	return lst
 }

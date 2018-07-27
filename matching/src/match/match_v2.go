@@ -2,9 +2,8 @@ package match
 
 import (
 	"image"
-	"image/draw"
-	"image/png"
 	"image/jpeg"
+	"image/png"
 	"os"
 	"sort"
 	"sync"
@@ -12,19 +11,10 @@ import (
 
 func calcDiffV2(x uint32, y uint32) uint32 {
 	if x < y {
-	   return y - x 
+		return y - x
 	} else {
 		return x - y
 	}
-}
-
-func convertToGray(src image.Image) image.Image {
-	bounds := src.Bounds()
-	w, h := bounds.Max.X, bounds.Max.Y
-	result := image.NewGray(image.Rect(0, 0, w, h))
-	draw.Draw(result, result.Bounds(), src, bounds.Min, draw.Src)
-
-	return result
 }
 
 func findMinDiffV2(src image.Image, target image.Image) int {
@@ -38,12 +28,12 @@ func findMinDiffV2(src image.Image, target image.Image) int {
 	minx := -1
 	// miny := -1
 	step := 50
-	for x := 0; x < w - tw; x++ {
-		for y := 0; y < h - th; y++ {
+	for x := 0; x < w-tw; x++ {
+		for y := 0; y < h-th; y++ {
 			var sumDiff uint32
 			for tx := 0; tx < tw; tx = tx + step {
 				for ty := 0; ty < th; ty = ty + step {
-					color := src.At(x + tx, y + ty)
+					color := src.At(x+tx, y+ty)
 					g, _, _, _ := color.RGBA()
 
 					tColor := target.At(tx, ty)
@@ -113,5 +103,5 @@ func MatchV2(f string) []string {
 		lst = append(lst, r.name)
 	}
 
- 	return lst
+	return lst
 }
